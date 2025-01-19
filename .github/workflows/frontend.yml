@@ -1,0 +1,41 @@
+name: Frontend CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      # Step 3: Navigate to the frontend directory and install dependencies
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm install
+
+      # Step 4: Run linting
+      - name: Run lint
+        run: |
+          cd frontend
+          npm run lint
+
+      # Step 5: Build frontend
+      - name: Build frontend
+        run: |
+          cd frontend
+          npm run build

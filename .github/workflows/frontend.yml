@@ -7,7 +7,7 @@ on:
   pull_request:
     branches:
       - master
-  workflow_dispatch: # Allow manual triggering
+  workflow_dispatch:
 
 jobs:
   lint-and-build:
@@ -20,7 +20,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: "18" # Update to Node.js 18 or higher
 
       - name: Install dependencies
         run: |

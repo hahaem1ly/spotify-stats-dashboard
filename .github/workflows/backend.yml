@@ -2,9 +2,15 @@ name: Backend CI
 
 on:
   push:
-    branches: [master]
+    branches:
+      - master
+    paths:
+      - "backend/**" # Only trigger when files in the backend directory change
   pull_request:
-    branches: [master]
+    branches:
+      - master
+    paths:
+      - "backend/**" # Only trigger when files in the backend directory change
   workflow_dispatch: # Allow manual triggering
 
 jobs:

@@ -12,7 +12,13 @@ on:
       - master
     paths:
       - "frontend/**"
+
   workflow_dispatch:
+    inputs:
+      deploy:
+        description: "Trigger deployment to Netlify"
+        required: false
+        default: "false"
 
 jobs:
   lint-and-build:
@@ -41,3 +47,11 @@ jobs:
         run: |
           cd frontend
           npm run build
+
+      - name: Deploy to Netlify
+        if: ${{ github.event.inputs.deploy == 'true' }}
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          npx netlify-cli deploy --dir=frontend/dist --site=$NETLIFY_SITE_ID --auth=$NETLIFY_AUTH_TOKEN

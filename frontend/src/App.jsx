@@ -15,7 +15,7 @@ function Login() {
         <div className="vinyl-container">
             <div className="vinyl-wrapper">
                 <img
-                    src="../img/vinyl.png"
+                    src="../vinyl.png"
                     alt="Vinyl Record"
                     className="vinyl"
                 />

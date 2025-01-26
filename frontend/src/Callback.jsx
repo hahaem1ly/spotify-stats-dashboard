@@ -1,6 +1,9 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import PropTypes from "prop-types"; // Import PropTypes
+
+
 
 function Callback({ setToken }) {
     const navigate = useNavigate();
@@ -46,6 +49,13 @@ function Callback({ setToken }) {
             <p>Authenticating.asda..</p>
         </div>
     );
-}
 
+
+
+
+}
+// props validation 
+Callback.propTypes={
+    setToken: PropTypes.func.isRequired,
+};
 export default Callback;

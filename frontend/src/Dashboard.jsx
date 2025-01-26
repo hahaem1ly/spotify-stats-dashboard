@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import "./dashboardstyles.css"; // Import the separate stylesheet
+import PropTypes from "prop-types"; // Import PropTypes
+
 
 function Dashboard({ token }) {
     const [topTracks, setTopTracks] = useState([]);
@@ -44,6 +46,10 @@ function Dashboard({ token }) {
             </ul>
         </div>
     );
+}
+// props validation 
+Dashboard.propTypes = {
+    token: PropTypes.string,
 }
 
 export default Dashboard;

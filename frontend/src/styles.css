@@ -1,0 +1,147 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", "Arial", sans-serif; /* Modern font with fallback */
+  background: url("../img/background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  overflow: hidden; /* Prevent scrolling */
+}
+
+.vinyl-container {
+  position: relative;
+  height: 90vh;
+  width: 100%;
+  display: flex; /* Flexbox layout */
+  justify-content: space-between; /* Keep vinyl and text separate */
+  align-items: center; /* Vertically align items */
+  padding: 0 100px; /* Add horizontal spacing for text */
+  overflow: hidden; /* Prevent accidental horizontal scrolling */
+}
+
+/* Vinyl Wrapper */
+.vinyl-wrapper {
+  position: relative; /* No longer absolute */
+  width: 400px; /* Adjust the size of the vinyl */
+  height: 400px;
+  animation: spin2d 20s linear infinite;
+}
+/* Vinyl Container */
+.vinyl-container {
+  position: relative;
+  height: 100vh; /* Full viewport height */
+  width: 100%; /* Full viewport width */
+  display: flex; /* Flexbox layout */
+  justify-content: space-between; /* Separate vinyl and text */
+  align-items: center; /* Center items vertically */
+  padding: 0 100px; /* Horizontal padding for spacing */
+  overflow: hidden; /* Prevent accidental scrollbars */
+}
+
+/* Vinyl Wrapper */
+.vinyl-wrapper {
+  position: relative; /* Position relative to container */
+  width: 900px; /* Larger vinyl size */
+  height: 900px;
+  animation: spin2d 20s linear infinite; /* Spins the vinyl */
+  flex-shrink: 0; /* Prevent the vinyl from shrinking in smaller screens */
+  overflow: visible;
+  margin-left: -400px;
+}
+
+/* Vinyl Image Styling */
+.vinyl {
+  width: 100%; /* Fill the wrapper size */
+  height: 100%; /* Fill the wrapper size */
+  object-fit: cover; /* Maintain aspect ratio */
+  border-radius: 50%; /* Makes the vinyl circular */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Adds depth with shadow */
+}
+
+/* Content Styling */
+.content {
+  text-align: left;
+  z-index: 1;
+  width: 50%; /* Limit the width of the text block */
+  color: white; /* Set text color to white */
+  margin-left: -20px; /* Shift content slightly to the left */
+  padding-left: 0; /* Remove extra padding if present */
+}
+
+.title {
+  font-family: "Raleway", sans-serif; /* Bold and stylish for titles */
+  font-size: 4rem; /* Larger, modern text size */
+  font-weight: 700; /* Bold weight for emphasis */
+  letter-spacing: -0.05em; /* Slightly tighten letter spacing */
+}
+
+.subtitle {
+  font-family: "Poppins", sans-serif; /* Simple and clean for subtitles */
+  font-size: 1.5rem; /* Slightly larger for readability */
+  color: #d3d3d3; /* A subtle, modern gray */
+}
+
+.highlight {
+  font-family: "Raleway", sans-serif; /* Match title font */
+  font-weight: 700;
+  font-size: 4rem; /* Matches the title size */
+  background: linear-gradient(
+    90deg,
+    #ff7eb3,
+    #ff758c,
+    #1db954,
+    #17a743,
+    #4bc0c8
+  );
+  background-size: 300%; /* Makes the gradient larger for smooth movement */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientAnimation 8s infinite ease-in-out; /* Smooth infinite animation */
+}
+
+/* Gradient Animation Keyframes */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.login-btn {
+  font-size: 1.3rem;
+  padding: 0.85rem 1.8rem;
+  color: black; /* Keep button text black */
+  background-color: #1db954;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #17a743;
+}
+
+/* Gradient Animation */
+@keyframes gradientMove {
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: 100%;
+  }
+}
+
+/* Simple 2D Spin Animation */
+@keyframes spin2d {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

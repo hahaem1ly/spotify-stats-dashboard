@@ -1,68 +1,82 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Poppins", "Arial", sans-serif; /* Modern font with fallback */
+  font-family: "Poppins", "Arial", sans-serif;
   background: url("../background.jpg") no-repeat center center fixed;
   background-size: cover;
-  overflow: hidden; /* Prevent scrolling */
+  overflow: hidden;
 }
 
 .vinyl-container {
   position: relative;
-  height: 100vh; /* Full viewport height */
-  width: 100%; /* Full viewport width */
-  display: flex; /* Flexbox layout */
-  justify-content: space-between; /* Separate vinyl and text */
-  align-items: center; /* Center items vertically */
-  padding: 0 100px; /* Horizontal padding for spacing */
-  overflow: hidden; /* Prevent accidental scrollbars */
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
+  overflow: hidden;
 }
 
-/* Vinyl Wrapper */
 .vinyl-wrapper {
-  position: relative; /* Position relative to container */
-  width: 900px; /* Larger vinyl size */
-  height: 900px;
-  animation: spin2d 20s linear infinite; /* Spins the vinyl */
-  flex-shrink: 0; /* Prevent the vinyl from shrinking in smaller screens */
-  overflow: visible;
-  margin-left: -400px;
+  position: relative;
+  width: 75vw;
+  height: 75vw;
+  animation: spin2d 20s linear infinite;
+  flex-shrink: 0;
+  margin-left: -37.5vw;
+  overflow: hidden;
 }
 
 .vinyl {
-  width: 100%; /* Fill the wrapper size */
-  height: 100%; /* Fill the wrapper size */
-  object-fit: cover; /* Maintain aspect ratio */
-  border-radius: 50%; /* Makes the vinyl circular */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Adds depth with shadow */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 768px) {
+  .vinyl-wrapper {
+    width: 85vw;
+    height: 85vw;
+    margin-left: -42.5vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .vinyl-wrapper {
+    width: 95vw;
+    height: 95vw;
+    margin-left: -47.5vw;
+  }
 }
 
 .content {
   text-align: left;
   z-index: 1;
-  width: 50%; /* Limit the width of the text block */
-  color: white; /* Set text color to white */
-  margin-left: -20px; /* Shift content slightly to the left */
-  padding-left: 0; /* Remove extra padding if present */
+  width: 50%;
+  color: white;
+  padding: 0 20px;
 }
 
 .title {
-  font-family: "Raleway", sans-serif; /* Bold and stylish for titles */
-  font-size: 4rem; /* Larger, modern text size */
-  font-weight: 700; /* Bold weight for emphasis */
-  letter-spacing: -0.05em; /* Slightly tighten letter spacing */
+  font-family: "Raleway", sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.05em;
 }
 
 .subtitle {
-  font-family: "Poppins", sans-serif; /* Simple and clean for subtitles */
-  font-size: 1.5rem; /* Slightly larger for readability */
-  color: #d3d3d3; /* A subtle, modern gray */
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  color: #d3d3d3;
 }
 
 .highlight {
-  font-family: "Raleway", sans-serif; /* Match title font */
+  font-family: "Raleway", sans-serif;
   font-weight: 700;
-  font-size: 4rem; /* Matches the title size */
+  font-size: 3rem;
   background: linear-gradient(
     90deg,
     #ff7eb3,
@@ -71,16 +85,16 @@ body {
     #17a743,
     #4bc0c8
   );
-  background-size: 300%; /* Makes the gradient larger for smooth movement */
+  background-size: 300%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: gradientAnimation 8s infinite ease-in-out; /* Smooth infinite animation */
+  animation: gradientAnimation 8s infinite ease-in-out;
 }
 
 .login-btn {
   font-size: 1.3rem;
   padding: 0.85rem 1.8rem;
-  color: black; /* Keep button text black */
+  color: black;
   background-color: #1db954;
   border: none;
   border-radius: 30px;
@@ -92,7 +106,6 @@ body {
   background-color: #17a743;
 }
 
-/* Gradient Animation */
 @keyframes gradientAnimation {
   0% {
     background-position: 0% 50%;
@@ -105,68 +118,11 @@ body {
   }
 }
 
-/* Simple 2D Spin Animation */
 @keyframes spin2d {
   0% {
     transform: rotate(0deg);
   }
   100% {
     transform: rotate(360deg);
-  }
-}
-
-/* Responsive Media Queries */
-
-/* For tablets (width <= 768px) */
-@media (max-width: 768px) {
-  .vinyl-container {
-    flex-direction: column; /* Stack vinyl and text vertically */
-    padding: 0 40px; /* Reduce horizontal padding */
-  }
-
-  .vinyl-wrapper {
-    width: 300px; /* Reduce vinyl size */
-    height: 300px;
-    margin-left: 0; /* Center vinyl */
-  }
-
-  .content {
-    width: 100%; /* Take full width */
-    text-align: center; /* Center text */
-    margin: 20px 0; /* Add vertical spacing */
-  }
-
-  .title {
-    font-size: 2.5rem; /* Smaller font size */
-  }
-
-  .subtitle {
-    font-size: 1.2rem;
-  }
-
-  .login-btn {
-    font-size: 1rem;
-    padding: 0.75rem 1.5rem; /* Adjust button size */
-  }
-}
-
-/* For mobile devices (width <= 480px) */
-@media (max-width: 480px) {
-  .vinyl-wrapper {
-    width: 200px;
-    height: 200px; /* Further reduce vinyl size */
-  }
-
-  .title {
-    font-size: 2rem; /* Even smaller font size */
-  }
-
-  .subtitle {
-    font-size: 1rem;
-  }
-
-  .login-btn {
-    font-size: 0.9rem;
-    padding: 0.6rem 1.2rem;
   }
 }

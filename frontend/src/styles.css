@@ -9,25 +9,6 @@ body {
 
 .vinyl-container {
   position: relative;
-  height: 90vh;
-  width: 100%;
-  display: flex; /* Flexbox layout */
-  justify-content: space-between; /* Keep vinyl and text separate */
-  align-items: center; /* Vertically align items */
-  padding: 0 100px; /* Add horizontal spacing for text */
-  overflow: hidden; /* Prevent accidental horizontal scrolling */
-}
-
-/* Vinyl Wrapper */
-.vinyl-wrapper {
-  position: relative; /* No longer absolute */
-  width: 400px; /* Adjust the size of the vinyl */
-  height: 400px;
-  animation: spin2d 20s linear infinite;
-}
-/* Vinyl Container */
-.vinyl-container {
-  position: relative;
   height: 100vh; /* Full viewport height */
   width: 100%; /* Full viewport width */
   display: flex; /* Flexbox layout */
@@ -48,7 +29,6 @@ body {
   margin-left: -400px;
 }
 
-/* Vinyl Image Styling */
 .vinyl {
   width: 100%; /* Fill the wrapper size */
   height: 100%; /* Fill the wrapper size */
@@ -57,7 +37,6 @@ body {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Adds depth with shadow */
 }
 
-/* Content Styling */
 .content {
   text-align: left;
   z-index: 1;
@@ -98,19 +77,6 @@ body {
   animation: gradientAnimation 8s infinite ease-in-out; /* Smooth infinite animation */
 }
 
-/* Gradient Animation Keyframes */
-@keyframes gradientAnimation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
 .login-btn {
   font-size: 1.3rem;
   padding: 0.85rem 1.8rem;
@@ -127,12 +93,15 @@ body {
 }
 
 /* Gradient Animation */
-@keyframes gradientMove {
+@keyframes gradientAnimation {
   0% {
-    background-position: 0%;
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
   }
   100% {
-    background-position: 100%;
+    background-position: 0% 50%;
   }
 }
 
@@ -143,5 +112,61 @@ body {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+/* Responsive Media Queries */
+
+/* For tablets (width <= 768px) */
+@media (max-width: 768px) {
+  .vinyl-container {
+    flex-direction: column; /* Stack vinyl and text vertically */
+    padding: 0 40px; /* Reduce horizontal padding */
+  }
+
+  .vinyl-wrapper {
+    width: 300px; /* Reduce vinyl size */
+    height: 300px;
+    margin-left: 0; /* Center vinyl */
+  }
+
+  .content {
+    width: 100%; /* Take full width */
+    text-align: center; /* Center text */
+    margin: 20px 0; /* Add vertical spacing */
+  }
+
+  .title {
+    font-size: 2.5rem; /* Smaller font size */
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+  }
+
+  .login-btn {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem; /* Adjust button size */
+  }
+}
+
+/* For mobile devices (width <= 480px) */
+@media (max-width: 480px) {
+  .vinyl-wrapper {
+    width: 200px;
+    height: 200px; /* Further reduce vinyl size */
+  }
+
+  .title {
+    font-size: 2rem; /* Even smaller font size */
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .login-btn {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
   }
 }

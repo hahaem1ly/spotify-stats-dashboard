@@ -52,26 +52,29 @@ body {
   }
 }
 
+/* Responsive Text Scaling */
 .content {
   text-align: left;
   z-index: 1;
-  width: 50%;
+  width: 40%;
+  max-width: 500px;
   color: white;
   padding: 0 20px;
 }
 
 .title {
   font-family: "Raleway", sans-serif;
-  font-size: 4rem;
+  font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.2;
   text-transform: uppercase;
+  word-wrap: break-word;
 }
 
 .subtitle {
   font-family: "Poppins", sans-serif;
-  font-size: 1.8rem;
+  font-size: clamp(1rem, 3vw, 1.8rem);
   font-weight: 400;
   color: #e0e0e0;
   line-height: 1.5;
@@ -81,7 +84,7 @@ body {
 .highlight {
   font-family: "Raleway", sans-serif;
   font-weight: 900;
-  font-size: 4rem;
+  font-size: clamp(2rem, 5vw, 3rem);
   background: linear-gradient(
     90deg,
     #ff7eb3,
@@ -97,7 +100,7 @@ body {
 }
 
 .login-btn {
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
   padding: 1rem 2rem;
   font-weight: 700;
   color: black;

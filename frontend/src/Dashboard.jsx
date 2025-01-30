@@ -1,55 +1,74 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-import "./dashboardstyles.css"; // Import the separate stylesheet
-import PropTypes from "prop-types"; // Import PropTypes
-
+import PropTypes from "prop-types";
+import { fetchTopTracks } from "../../backend/api";
+import "./dashboardstyles.css";
+import TopNav from "./components/TopNav";
+import TopTracksGallery from "./components/GalleryTracks";
 
 function Dashboard({ token }) {
-    const [topTracks, setTopTracks] = useState([]);
+    const [topTracks, setTopTracks] = useState([]); // State for top tracks
+    const [currentView, setCurrentView] = useState("dashboard"); // State for switching views
 
+    // Fetch top tracks
     useEffect(() => {
-        if (!token) return;
-
-        // Fetch user's top tracks
-        axios
-            .get("https://api.spotify.com/v1/me/top/tracks", {
-                headers: { Authorization: `Bearer ${token}` },
-            })
-            .then((response) => {
-                setTopTracks(response.data.items);
-            })
-            .catch((error) => {
+        const getTopTracks = async () => {
+            if (!token) return;
+            try {
+                const tracks = await fetchTopTracks(token);
+                setTopTracks(tracks);
+            } catch (error) {
                 console.error("Error fetching top tracks:", error);
-            });
+            }
+        };
+
+        getTopTracks();
     }, [token]);
 
+    // Handle navigation between views
+    const handleNavigation = (view) => {
+        setCurrentView(view);
+    };
+
     return (
-        <div className="dashboard-container">
-            <h1 className="dashboard-title">Your Spotify Dashboard</h1>
-            <h2 className="dashboard-subtitle">Your Top Tracks</h2>
-            <ul className="track-list">
-                {topTracks.map((track) => (
-                    <li className="track-item" key={track.id}>
-                        <div className="track-info">
-                            <img
-                                className="track-image"
-                                src={track.album.images[0]?.url}
-                                alt={track.name}
-                            />
-                            <div>
-                                <p className="track-name">{track.name}</p>
-                                <p className="track-artist">{track.artists[0].name}</p>
-                            </div>
-                        </div>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <>
+            <TopNav onNavigate={handleNavigation} /> {/* Navigation bar */}
+            
+            {/* Conditional rendering based on `currentView` */}
+            {currentView === "dashboard" && (
+                <div className="dashboard-container">
+                    <h1 className="dashboard-title">Your Spotify Dashboard</h1>
+                    <h2 className="dashboard-subtitle">Your Top Tracks</h2>
+                    <ul className="track-list">
+                        {topTracks.map((track) => (
+                            <li className="track-item" key={track.id}>
+                                <div className="track-info">
+                                    <img
+                                        className="track-image"
+                                        src={track.album.images[0]?.url}
+                                        alt={track.name}
+                                    />
+                                    <div>
+                                        <p className="track-name">{track.name}</p>
+                                        <p className="track-artist">{track.artists[0].name}</p>
+                                    </div>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+
+            {currentView === "gallery" && (
+                <div className="gallery-view">
+                    <TopTracksGallery tracks={topTracks} />
+                </div>
+            )}
+        </>
     );
 }
-// props validation 
+
 Dashboard.propTypes = {
     token: PropTypes.string,
-}
+};
 
 export default Dashboard;

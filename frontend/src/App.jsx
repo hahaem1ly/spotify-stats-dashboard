@@ -5,10 +5,15 @@ import "./styles.css";
 import Dashboard from "./Dashboard";
 
 const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${
+
     import.meta.env.VITE_SPOTIFY_CLIENT_ID
 }&response_type=code&redirect_uri=${encodeURIComponent(
     import.meta.env.VITE_REDIRECT_URI
 )}&scope=user-read-private%20user-read-email%20user-top-read`;
+
+console.log("Client ID:", import.meta.env.VITE_SPOTIFY_CLIENT_ID);
+console.log("Redirect URI:", import.meta.env.VITE_REDIRECT_URI);
+
 
 function Login() {
     return (

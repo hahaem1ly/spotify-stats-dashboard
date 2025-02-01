@@ -27,7 +27,7 @@ function Login() {
             </div>
             <div className="content">
                 <h1 className="title">
-                    <span className="highlight">Spotify  Dashboard</span>
+                    <span className="highlight">Spotify Dashboard</span>
                 </h1>
                 <p className="subtitle">
                     Dive into your Spotify stats and favorite tracks.

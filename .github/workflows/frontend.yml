@@ -20,14 +20,12 @@ jobs:
           node-version: "18"
 
       - name: Install dependencies
-        run: |
-          cd frontend
-          npm install
+        run: npm install
+        working-directory: frontend
 
       - name: Run lint
-        run: |
-          cd frontend
-          npm run lint
+        run: npm run lint
+        working-directory: frontend
 
   build:
     runs-on: ubuntu-latest
@@ -42,14 +40,20 @@ jobs:
           node-version: "18"
 
       - name: Install dependencies
-        run: |
-          cd frontend
-          npm install
+        run: npm install
+        working-directory: frontend
 
       - name: Build frontend
-        run: |
-          cd frontend
-          npm run build
+        run: npm run build
+        working-directory: frontend
+        env:
+          NODE_ENV: production
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: frontend-dist
+          path: frontend/dist
 
   deploy:
     runs-on: ubuntu-latest
@@ -57,6 +61,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: frontend-dist
+          path: frontend/dist
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -67,5 +77,4 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        run: |
-          npx netlify-cli deploy --dir=frontend/dist --site=$NETLIFY_SITE_ID --auth=$NETLIFY_AUTH_TOKEN
+        run: npx netlify-cli deploy --prod --dir=frontend/dist --site=$NETLIFY_SITE_ID --auth=$NETLIFY_AUTH_TOKEN

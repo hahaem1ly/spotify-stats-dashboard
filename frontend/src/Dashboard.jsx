@@ -17,7 +17,7 @@ function Dashboard({ token }) {
                 const tracks = await fetchTopTracks(token);
                 setTopTracks(tracks);
             } catch (error) {
-                console.error("Error fetching top tracks:", error);
+                console.error("Error fetching top tracks :", error);
             }
         };
 

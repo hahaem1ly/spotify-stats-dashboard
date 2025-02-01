@@ -71,7 +71,7 @@ function Callback() {
                     navigate("/dashboard");
                 })
                 .catch((error) => {
-                    console.error("Error exchanging code for token:", error);
+                    console.error("Error exchanging code  for token:", error);
                 });
         }
     }, [navigate]);

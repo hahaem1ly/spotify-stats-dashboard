@@ -13,19 +13,29 @@ function Dashboard({ token }) {
     useEffect(() => {
         const getTopTracks = async () => {
             if (!token) return;
+
             try {
+                // Ensure the environment variable is loaded correctly
+                const backendUrl = import.meta.env.VITE_API_BASE_URL;
+
+                if (!backendUrl) {
+                    console.error("Error: VITE_API_BASE_URL is not defined.");
+                    return;
+                }
+
                 const response = await axios.get(
-                    `${import.meta.env.VITE_BACKEND_URL}/api/spotify/top-tracks`, 
+                    `${backendUrl}/api/spotify/top-tracks`,
                     {
                         headers: { Authorization: `Bearer ${token}` },
                     }
                 );
+
                 setTopTracks(response.data); // Update state with fetched tracks
             } catch (error) {
-                console.error("Error fetching top tracks :", error);
+                console.error("Error fetching top tracks:", error);
             }
         };
-    
+
         getTopTracks();
     }, [token]);
     

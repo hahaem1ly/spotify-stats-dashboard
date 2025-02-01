@@ -24,6 +24,7 @@ function Login() {
                     alt="Vinyl Record"
                     className="vinyl"
                 />
+                
             </div>
             <div className="content">
                 <h1 className="title">

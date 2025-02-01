@@ -7,15 +7,8 @@ on:
     paths:
       - "frontend/**"
 
-  pull_request:
-    branches:
-      - master
-    paths:
-      - "frontend/**"
-
 jobs:
   lint:
-    name: Lint Frontend
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -37,7 +30,6 @@ jobs:
           npm run lint
 
   build:
-    name: Build Frontend
     runs-on: ubuntu-latest
     needs: lint
     steps:
@@ -60,12 +52,16 @@ jobs:
           npm run build
 
   deploy:
-    name: Deploy to Netlify
     runs-on: ubuntu-latest
     needs: build
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
 
       - name: Deploy to Netlify
         env:

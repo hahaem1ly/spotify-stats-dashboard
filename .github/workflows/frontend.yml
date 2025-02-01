@@ -1,4 +1,4 @@
-name: Frontend CI
+name: Frontend CI/CD
 
 on:
   push:
@@ -14,9 +14,9 @@ on:
       - "frontend/**"
 
 jobs:
-  lint-and-build:
+  lint:
+    name: Lint Frontend
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -24,7 +24,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "18" # Use Node.js 18 or higher
+          node-version: "18"
 
       - name: Install dependencies
         run: |
@@ -36,10 +36,36 @@ jobs:
           cd frontend
           npm run lint
 
+  build:
+    name: Build Frontend
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm install
+
       - name: Build frontend
         run: |
           cd frontend
           npm run build
+
+  deploy:
+    name: Deploy to Netlify
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Deploy to Netlify
         env:

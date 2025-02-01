@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { fetchTopTracks } from "../../backend/api";
+import axios from "axios";
 import "./dashboardstyles.css";
 import TopNav from "./components/TopNav";
 import TopTracksGallery from "./components/GalleryTracks";
@@ -14,15 +14,21 @@ function Dashboard({ token }) {
         const getTopTracks = async () => {
             if (!token) return;
             try {
-                const tracks = await fetchTopTracks(token);
-                setTopTracks(tracks);
+                const response = await axios.get(
+                    `${import.meta.env.VITE_BACKEND_URL}/api/spotify/top-tracks`, 
+                    {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }
+                );
+                setTopTracks(response.data); // Update state with fetched tracks
             } catch (error) {
                 console.error("Error fetching top tracks :", error);
             }
         };
-
+    
         getTopTracks();
     }, [token]);
+    
 
     // Handle navigation between views
     const handleNavigation = (view) => {

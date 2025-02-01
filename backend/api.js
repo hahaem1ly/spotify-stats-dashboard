@@ -1,15 +1,19 @@
-import axios from "axios";
+const axios = require("axios");
 
-export const fetchTopTracks = async (token) => {
-    if (!token) return [];
-
+const fetchTopTracks = async (req, res) => {
     try {
+        const { authorization } = req.headers;
+        if (!authorization) return res.status(401).json({ error: "No token provided" });
+
         const response = await axios.get("https://api.spotify.com/v1/me/top/tracks", {
-            headers: { Authorization: `Bearer ${token}` },
+            headers: { Authorization: authorization },
         });
-        return response.data.items;
+
+        res.json(response.data.items);
     } catch (error) {
-        console.error("Error fetching top tracks:", error);
-        return [];
+        console.error("Error fetching top tracks from Spotify:", error);
+        res.status(500).json({ error: "Failed to fetch top tracks" });
     }
 };
+
+module.exports = { fetchTopTracks };

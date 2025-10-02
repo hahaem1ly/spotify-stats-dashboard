@@ -20,7 +20,7 @@ A modern web application that connects with the **Spotify Web API** to display p
 
 ---
 
-## 🌟 What I Learned
+## 🌟 What I Learned 
 - **OAuth 2.0**: Implementing Spotify's Authorization Code Flow securely and managing tokens.
 - **API Integration**: Fetching user-specific data with RESTful APIs.
 - **CI/CD Pipelines**: Automating builds and deployments for the frontend with Netlify.
